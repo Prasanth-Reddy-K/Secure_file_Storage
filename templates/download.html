@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Secure File Storage</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+        }
+
+        .container {
+            width: 80%;
+            margin: 50px auto;
+        }
+
+        .file-card {
+            background-color: #f2f2f2;
+            padding: 15px;
+            border-radius: 5px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between; /* Space between filename and button */
+            width: 100%; /* Set card width to 100% for responsiveness */
+        }
+
+        h1 {
+            text-align: center;
+        }
+
+        .file-list {
+            margin-top: 30px;
+        }
+
+        .file-list ul {
+            list-style-type: none;
+            padding: 0;
+        }
+
+        .file-list li {
+            margin-bottom: 10px;
+        }
+
+        .download-button {
+            padding: 8px 15px;
+            background-color: #4CAF50;
+            color: white;
+            border: none;
+            cursor: pointer;
+            border-radius: 5px;
+        }
+
+        .download-button:hover {
+            background-color: #45a049;
+        }
+
+        .nav-bar {
+            background-color: #76B947;
+            overflow: hidden;
+            float: right;
+        }
+
+        .nav-bar a {
+            float: left;
+            display: block;
+            color: white;
+            text-align: center;
+            padding: 14px 16px;
+            text-decoration: none;
+        }
+
+        .title {
+            background: #76B947;
+            width: 100%;
+            height: 130px;
+            font-size: 25px;
+            text-align: center;
+            padding: 10px;
+        }
+
+        .nav-bar a:hover {
+            background-color: #ddd;
+            color: black;
+        }
+
+        .nav-bar a.active {
+            background-color: #4CAF50;
+            color: white;
+        }
+
+        .logout {
+            float: right;
+        }
+    </style>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+    <script>
+        function downloadFile(filename) {
+            document.title = 'Please Wait!  Downloading...';
+            fetch(`/download/${filename}`)
+                .then(response => {
+                    if (!response.ok) {
+                        throw new Error(`Failed to fetch: ${response.statusText}`);
+                    }
+                    return response.blob();
+                })
+                .then(blob => {
+                    const url = window.URL.createObjectURL(blob);
+                    const link = document.createElement('a');
+                    link.href = url;
+                    let name_of_file = filename.substring(0, filename.lastIndexOf("(")).replace(/\s+/g, "");
+                    let type_of_file = filename.substring(filename.lastIndexOf("(") + 1, filename.lastIndexOf(")"));
+                    link.download = name_of_file + "." + type_of_file; // Set the download attribute
+                    document.body.appendChild(link);
+                    link.click();
+                    document.body.removeChild(link);
+                    window.URL.revokeObjectURL(url);
+                    document.title = 'Secure File Storage';
+                })
+                .catch(error => {
+                    console.error("Error downloading file:", error);
+                    document.title = 'Secure File Storage';
+                });
+        }
+    </script>
+</head>
+
+<body>
+    <div class="title">
+        <h1>Hybrid Cryptography for Ensuring Data Privacy in Cloud Storage</h1>
+    </div>
+    <div class="nav-bar">
+        <a href="/upload">Upload</a>
+        <a class="active">View Files</a>
+        <a href="/login" class="logout">Logout</a>
+    </div>
+    <div class="container">
+        <h1>List of Files</h1>
+
+        <div class="file-list">
+            <h2>Files in Directory:</h2>
+            <ul>
+                {% for file in files %}
+                <li class="file-card">
+                    <span>{{ file }}</span>
+                    <button class="download-button" onclick="downloadFile('{{ file }}')">Download</button>
+                </li>
+                {% endfor %}
+            </ul>
+        </div>
+    </div>
+
+</body>
+
+</html>

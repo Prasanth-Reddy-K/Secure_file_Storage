@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Secure File Storage</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+        }
+
+        .container {
+            width: 80%;
+            margin: 50px auto;
+        }
+
+        h1 {
+            text-align: center;
+        }
+
+        form {
+            width: 50%;
+            margin: 0 auto;
+        }
+
+        label {
+            display: block;
+            margin-bottom: 10px;
+            font-weight: bold;
+        }
+
+        input[type="file"] {
+            width: 100%;
+            padding: 10px;
+            margin-bottom: 15px;
+            border: 1px solid #ccc;
+            box-sizing: border-box;
+        }
+
+        button {
+            padding: 10px 20px;
+            background-color: #4CAF50;
+            color: white;
+            border: none;
+            cursor: pointer;
+        }
+
+        button:hover {
+            background-color: #45a049;
+        }
+
+        img {
+            display: block;
+            margin: 0 auto;
+            max-width: 200px;
+            margin-bottom: 15px;
+        }
+
+        .file-list {
+            margin-top: 30px;
+        }
+
+        .file-list ul {
+            list-style-type: none;
+            padding: 0;
+        }
+
+        .file-list li {
+            margin-bottom: 10px;
+        }
+
+        .nav-bar {
+            background-color: #76B947;
+            overflow: hidden;
+            float: right;
+        }
+
+        .nav-bar a {
+            float: left;
+            display: block;
+            color: white;
+            text-align: center;
+            padding: 14px 16px;
+            text-decoration: none;
+        }
+        .title{
+            background: #76B947;
+            width: 100%;
+            height: 130px;
+            font-size: 25px;
+            text-align: center;
+            padding: 10px;
+        }
+        
+
+        .nav-bar a:hover {
+            background-color: #ddd;
+            color: black;
+        }
+
+        .nav-bar a.active {
+            background-color: #4CAF50;
+            color: white;
+        }
+
+        .logout {
+            float: right;
+        }
+    </style>
+</head>
+
+<body>
+<div class="title">
+    <h1>Hybrid Cryptography for Ensuring Data Privacy in Cloud Storage
+    </h1>
+</div>
+    <div class="nav-bar">
+        <a class="active">Upload</a>
+        <a href="/viewfiles">View Files</a>
+        <a href="/login" class="logout">Logout</a>
+    </div>
+<div class="container">
+    <h1>Upload File</h1>
+    <form action="/encrypt" method="post" enctype="multipart/form-data">
+        <label for="file">Select a file:</label><br>
+        <input type="file" id="file" name="file" required><br><br>
+        <button type="submit">Upload</button>
+    </form>
+    </div>
+{% if message %}
+    <script>
+        alert("{{ message }}");  // Display alert message with passed data
+    </script>
+    {% endif %}
+</body>
+
+</html>

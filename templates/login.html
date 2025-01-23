@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login Form</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+        }
+
+        .container {
+            width: 350px;
+            margin: 0 auto;
+            padding-top: 50px;
+        }
+
+        input[type=email],
+        input[type=password] {
+            width: 100%;
+            padding: 12px 20px;
+            margin: 8px 0;
+            display: inline-block;
+            border: 1px solid #ccc;
+            box-sizing: border-box;
+        }
+
+        button {
+            background-color: #4CAF50;
+            color: white;
+            padding: 14px 20px;
+            margin: 8px 0;
+            border: none;
+            cursor: pointer;
+            width: 100%;
+        }
+
+        button:hover {
+            opacity: 0.8;
+        }
+
+        .container {
+            padding: 16px;
+        }
+
+        .remember {
+            display: inline-block;
+            margin-bottom: 10px;
+        }
+
+        .signup {
+            text-align: center;
+        }
+
+        .forgot-password {
+            text-align: center;
+        }
+        .title{
+            background: #76B947;
+            width: 100%;
+            height: 150px;
+            font-size: 25px;
+            text-align: center;
+            padding: 10px;
+        }
+        
+    </style>
+</head>
+
+<body>
+    <div class="title">
+        <h1>Hybrid Cryptography for Ensuring Data Privacy in Cloud Storage
+        </h1>
+    </div>
+    <div class="container">
+        <h1 style="text-align: center;">Login Form</h1>
+        <form action="/userlogin" method="post">
+            <label for="email">Email</label>
+            <input type="email" id="email" placeholder="Enter Email" name="email" required>
+
+            <label for="password">Password:</label>
+            <input type="password" id="password" placeholder="Enter Password" name="password" required>
+
+            <label class="remember">
+                <input type="checkbox" checked="checked"> Remember me
+            </label>
+
+            <button type="submit">Login</button>
+
+            <div class="signup">
+                <p>Don't have an account? <a href="/signup">Sign up</a></p>
+            </div>
+            <div class="forgot-password">
+                <a href="/forgot_pass">Forgot password?</a>
+            </div>
+        </form>
+    </div>
+
+</body>
+
+</html>
